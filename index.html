@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turnê Remodelar — Imersão Petrolina</title>
+    <meta name="description" content="Imersão presencial de 1 dia para profissionais da odontologia. Diagnóstico, planejamento e execução clínica com método estruturado. Petrolina, 16 de maio de 2026.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS RESET & BASE
+           ============================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --nevoa: #D2D7DB;
+            --cinza-medio: #98A1AA;
+            --aco: #7F99B2;
+            --gelo: #F7F7F7;
+            --petroleo: #39586D;
+            --marinho: #2C4156;
+            --branco: #FFFFFF;
+            --font: 'Montserrat', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: var(--font);
+            color: var(--marinho);
+            background: var(--gelo);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ============================================
+           LOADING SCREEN
+           ============================================ */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--marinho);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-logo {
+            font-family: var(--font);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--branco);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: pulse-loader 1.2s ease-in-out infinite;
+        }
+        @keyframes pulse-loader {
+            0%, 100% { opacity: 0.3; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(44, 65, 86, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.7rem 2rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--branco);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .nav-logo span { color: var(--aco); font-weight: 300; }
+        .nav-cta {
+            padding: 0.55rem 1.5rem;
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            color: var(--branco);
+            font-family: var(--font);
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-cta:hover {
+            background: var(--branco);
+            color: var(--marinho);
+            border-color: var(--branco);
+        }
+
+        /* ============================================
+           ANIMATED GRID PATTERN
+           ============================================ */
+        .grid-pattern-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .grid-pattern-container svg { width: 100%; height: 100%; }
+
+        /* ============================================
+           SHINY BUTTON (adapted from React to pure CSS)
+           ============================================ */
+        @property --gradient-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+        @property --gradient-angle-offset {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+        @property --gradient-percent {
+            syntax: "<percentage>";
+            initial-value: 5%;
+            inherits: false;
+        }
+        @property --gradient-shine {
+            syntax: "<color>";
+            initial-value: white;
+            inherits: false;
+        }
+
+        .shiny-cta {
+            --shiny-cta-bg: #2C4156;
+            --shiny-cta-bg-subtle: #39586D;
+            --shiny-cta-fg: #ffffff;
+            --shiny-cta-highlight: #7F99B2;
+            --shiny-cta-highlight-subtle: #98A1AA;
+            --btn-animation: gradient-angle linear infinite;
+            --btn-duration: 3s;
+            --shadow-size: 2px;
+            --btn-transition: 800ms cubic-bezier(0.25, 1, 0.5, 1);
+
+            isolation: isolate;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            outline-offset: 4px;
+            padding: 1.1rem 2.5rem;
+            font-family: 'Inter', var(--font), sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.2;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            border-radius: 360px;
+            color: var(--shiny-cta-fg);
+            background:
+                linear-gradient(var(--shiny-cta-bg), var(--shiny-cta-bg)) padding-box,
+                conic-gradient(
+                    from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+                    transparent,
+                    var(--shiny-cta-highlight) var(--gradient-percent),
+                    var(--gradient-shine) calc(var(--gradient-percent) * 2),
+                    var(--shiny-cta-highlight) calc(var(--gradient-percent) * 3),
+                    transparent calc(var(--gradient-percent) * 4)
+                ) border-box;
+            box-shadow: inset 0 0 0 1px var(--shiny-cta-bg-subtle);
+            transition: var(--btn-transition);
+            transition-property: --gradient-angle-offset, --gradient-percent, --gradient-shine;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .shiny-cta::before,
+        .shiny-cta::after,
+        .shiny-cta span::before {
+            content: "";
+            pointer-events: none;
+            position: absolute;
+            inset-inline-start: 50%;
+            inset-block-start: 50%;
+            translate: -50% -50%;
+            z-index: -1;
+        }
+        .shiny-cta:active { translate: 0 1px; }
+
+        /* Dots pattern */
+        .shiny-cta::before {
+            --size: calc(100% - var(--shadow-size) * 3);
+            --position: 2px;
+            --space: calc(var(--position) * 2);
+            width: var(--size);
+            height: var(--size);
+            background: radial-gradient(circle at var(--position) var(--position), white calc(var(--position) / 4), transparent 0) padding-box;
+            background-size: var(--space) var(--space);
+            background-repeat: space;
+            mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
+            border-radius: inherit;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        /* Inner shimmer */
+        .shiny-cta::after {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(-50deg, transparent, var(--shiny-cta-highlight), transparent);
+            mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+            opacity: 0.6;
+        }
+
+        .shiny-cta span { z-index: 1; }
+        .shiny-cta span::before {
+            --size: calc(100% + 1rem);
+            width: var(--size);
+            height: var(--size);
+            box-shadow: inset 0 -1ex 2rem 4px var(--shiny-cta-highlight);
+            opacity: 0;
+            transition: opacity var(--btn-transition);
+            animation: calc(var(--btn-duration) * 1.5) breathe linear infinite;
+        }
+
+        .shiny-cta,
+        .shiny-cta::before,
+        .shiny-cta::after {
+            animation: var(--btn-animation) var(--btn-duration),
+                       var(--btn-animation) calc(var(--btn-duration) / 0.4) reverse paused;
+            animation-composition: add;
+        }
+        .shiny-cta:is(:hover, :focus-visible) {
+            --gradient-percent: 20%;
+            --gradient-angle-offset: 95deg;
+            --gradient-shine: var(--shiny-cta-highlight-subtle);
+        }
+        .shiny-cta:is(:hover, :focus-visible),
+        .shiny-cta:is(:hover, :focus-visible)::before,
+        .shiny-cta:is(:hover, :focus-visible)::after {
+            animation-play-state: running;
+        }
+        .shiny-cta:is(:hover, :focus-visible) span::before { opacity: 1; }
+
+        .shiny-cta .arrow-icon { transition: transform 0.3s ease; }
+        .shiny-cta:hover .arrow-icon { transform: translateX(4px); }
+
+        @keyframes gradient-angle { to { --gradient-angle: 360deg; } }
+        @keyframes shimmer { to { rotate: 360deg; } }
+        @keyframes breathe { from, to { scale: 1; } 50% { scale: 1.2; } }
+
+        /* Light variant for dark backgrounds */
+        .shiny-cta-light {
+            --shiny-cta-bg: rgba(255,255,255,0.08);
+            --shiny-cta-bg-subtle: rgba(255,255,255,0.15);
+            --shiny-cta-highlight: #7F99B2;
+            --shiny-cta-highlight-subtle: #D2D7DB;
+        }
+
+        /* ============================================
+           SECTION: HERO
+           ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--marinho);
+            overflow: hidden;
+            padding: 6rem 2rem 4rem;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 120px;
+            background: linear-gradient(to top, var(--gelo), transparent);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border: 1px solid rgba(127, 153, 178, 0.4);
+            border-radius: 50px;
+            background: rgba(127, 153, 178, 0.08);
+            color: var(--aco);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.5s;
+        }
+        .hero-badge .dot {
+            width: 6px; height: 6px;
+            background: var(--aco);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--branco);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards 0.7s;
+        }
+        .hero h1 strong { font-weight: 700; color: var(--aco); display: block; }
+        .hero-sub {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--nevoa);
+            max-width: 680px;
+            margin: 0 auto 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards 0.9s;
+        }
+        .hero-cta-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards 1.1s;
+        }
+        .cta-note {
+            font-size: 0.75rem;
+            color: var(--cinza-medio);
+            font-weight: 400;
+        }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           SECTION UTILITIES
+           ============================================ */
+        .section { padding: 6rem 2rem; }
+        .section-light { background: var(--gelo); }
+        .section-white { background: var(--branco); }
+        .section-dark {
+            background: var(--marinho);
+            color: var(--branco);
+            position: relative;
+            overflow: hidden;
+        }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--aco);
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+        }
+        .section-dark .section-title { color: var(--branco); }
+        .section-line {
+            width: 60px; height: 3px;
+            background: var(--aco);
+            margin-bottom: 2rem;
+            border-radius: 2px;
+        }
+        .section-line-center { margin-left: auto; margin-right: auto; }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================
+           SECTION: DOR (Identification) — V2 REDESIGN
+           ============================================ */
+        .dor-content { max-width: 800px; margin: 0 auto; }
+        .dor-question {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--marinho);
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+        .dor-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--marinho);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        .dor-text strong { color: var(--petroleo); font-weight: 600; }
+
+        /* Highlight effect */
+        .highlight-mark {
+            background: linear-gradient(120deg, rgba(127,153,178,0.15) 0%, rgba(127,153,178,0.25) 100%);
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            background-position: 0 0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background-size 0.8s ease;
+        }
+        .highlight-mark.active { background-size: 100% 100%; }
+
+        /* Disconnection cards */
+        .dor-disconnect-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2.5rem 0;
+        }
+        .dor-disconnect-card {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: var(--branco);
+            border-radius: 12px;
+            box-shadow: 0 2px 20px rgba(44,65,86,0.06);
+            position: relative;
+        }
+        .dor-disconnect-card .disc-icon {
+            width: 44px; height: 44px;
+            margin: 0 auto 0.8rem;
+            color: var(--aco);
+        }
+        .dor-disconnect-card .disc-from,
+        .dor-disconnect-card .disc-to {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--petroleo);
+            letter-spacing: 0.5px;
+        }
+        .dor-disconnect-card .disc-break {
+            display: block;
+            margin: 0.4rem 0;
+            font-size: 1.2rem;
+            color: var(--cinza-medio);
+            opacity: 0.5;
+        }
+        .dor-disconnect-card .disc-break svg {
+            width: 24px; height: 24px;
+            animation: break-pulse 2s ease-in-out infinite;
+        }
+        @keyframes break-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .dor-separator {
+            width: 40px; height: 2px;
+            background: var(--nevoa);
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        .dor-highlight {
+            border-left: 3px solid var(--aco);
+            padding: 1.5rem 2rem;
+            margin-top: 2.5rem;
+            background: rgba(127, 153, 178, 0.05);
+            border-radius: 0 12px 12px 0;
+        }
+        .dor-highlight p {
+            font-weight: 600;
+            color: var(--petroleo);
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        /* ============================================
+           SECTION: CONTEUDO PROGRAMATICO — V2 REFINED
+           ============================================ */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .content-card {
+            background: var(--branco);
+            border: none;
+            border-radius: 12px;
+            padding: 2.5rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 20px rgba(44, 65, 86, 0.06);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .content-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 50px rgba(44, 65, 86, 0.12), 0 0 0 1px rgba(127,153,178,0.15);
+        }
+
+        .card-number {
+            position: absolute;
+            top: 0.8rem;
+            right: 1.2rem;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--marinho);
+            opacity: 0.05;
+            line-height: 1;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .content-card:hover .card-number { opacity: 0.1; }
+
+        .card-icon {
+            width: 36px; height: 36px;
+            margin-bottom: 1rem;
+            color: var(--aco);
+            transition: transform 0.4s ease;
+        }
+        .content-card:hover .card-icon { transform: scale(1.1) rotate(3deg); }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--petroleo);
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+        .card-desc {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--cinza-medio);
+            font-weight: 400;
+        }
+
+        /* ============================================
+           SECTION: PARA QUEM E
+           ============================================ */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+        .audience-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            background: var(--branco);
+            border: 1px solid transparent;
+            box-shadow: 0 1px 10px rgba(44,65,86,0.04);
+            transition: all 0.3s ease;
+        }
+        .audience-item:hover {
+            border-color: rgba(127,153,178,0.2);
+            box-shadow: 0 4px 20px rgba(44,65,86,0.08);
+        }
+        .audience-check {
+            flex-shrink: 0;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: rgba(127, 153, 178, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+        .audience-check svg { width: 12px; height: 12px; color: var(--aco); }
+        .audience-text { font-size: 0.95rem; line-height: 1.6; color: var(--marinho); }
+        .audience-callout {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--branco);
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(44,65,86,0.06);
+        }
+        .audience-callout p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--petroleo);
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        /* ============================================
+           SECTION: QUEM CONDUZ
+           ============================================ */
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .speaker-photo {
+            aspect-ratio: 3/4;
+            background: rgba(127, 153, 178, 0.1);
+            border: 2px solid rgba(127, 153, 178, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .speaker-photo-placeholder {
+            font-size: 0.75rem;
+            color: var(--cinza-medio);
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 2rem;
+        }
+        .speaker-photo::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, rgba(127,153,178,0.1), transparent 30%);
+            animation: rotate-border 6s linear infinite;
+        }
+        @keyframes rotate-border { to { transform: rotate(360deg); } }
+        .speaker-info h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            color: var(--branco);
+            margin-bottom: 1.5rem;
+        }
+        .speaker-info h3 span { color: var(--aco); }
+        .speaker-info p {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--nevoa);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        .speaker-info strong { color: var(--branco); font-weight: 600; }
+        .speaker-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        .speaker-tag {
+            padding: 0.35rem 0.8rem;
+            background: rgba(127,153,178,0.12);
+            border: 1px solid rgba(127,153,178,0.25);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--aco);
+            letter-spacing: 1px;
+        }
+
+        /* ============================================
+           SECTION: DETALHES EVENTO
+           ============================================ */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .detail-card {
+            background: var(--branco);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(44,65,86,0.06);
+            transition: all 0.3s ease;
+        }
+        .detail-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(44,65,86,0.1);
+        }
+        .detail-icon { width: 48px; height: 48px; margin: 0 auto 1rem; color: var(--aco); }
+        .detail-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--cinza-medio);
+            margin-bottom: 0.5rem;
+        }
+        .detail-value { font-size: 1.1rem; font-weight: 700; color: var(--marinho); line-height: 1.4; }
+
+        /* ============================================
+           SECTION: INVESTIMENTO
+           ============================================ */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .pricing-card {
+            background: var(--branco);
+            border: 1.5px solid var(--nevoa);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        .pricing-card.featured {
+            border-color: var(--aco);
+            box-shadow: 0 8px 40px rgba(57, 88, 109, 0.12);
+        }
+        .pricing-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--aco), var(--petroleo));
+            border-radius: 16px 16px 0 0;
+        }
+        .pricing-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--petroleo);
+            color: var(--branco);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+        .pricing-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--cinza-medio);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .pricing-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--marinho);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .pricing-amount span {
+            font-size: 1.2rem;
+            font-weight: 500;
+            vertical-align: top;
+            margin-right: 2px;
+        }
+        .pricing-note {
+            font-size: 0.8rem;
+            color: var(--cinza-medio);
+            font-weight: 400;
+            line-height: 1.5;
+            margin-top: 1rem;
+        }
+        .pricing-cta-wrapper { text-align: center; margin-top: 3rem; }
+
+        /* ============================================
+           SECTION: FECHAMENTO
+           ============================================ */
+        .closing-content {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .closing-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--nevoa);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+        .closing-emphasis {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem) !important;
+            font-weight: 600 !important;
+            color: var(--aco) !important;
+            margin-top: 2rem !important;
+            letter-spacing: 0.5px;
+        }
+        .closing-cta { margin-top: 3rem; }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: #1a2f40;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(127,153,178,0.15);
+        }
+        .footer-logo {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: var(--branco);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .footer-logo span { color: var(--aco); font-weight: 300; }
+        .footer p { font-size: 0.75rem; color: var(--cinza-medio); }
+
+        /* ============================================
+           STICKY CTA (Mobile)
+           ============================================ */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            padding: 0.8rem 1.2rem;
+            background: rgba(44, 65, 86, 0.97);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            box-shadow: 0 -4px 30px rgba(0,0,0,0.15);
+        }
+        .sticky-cta.show { transform: translateY(0); }
+        .sticky-cta .shiny-cta {
+            width: 100%;
+            justify-content: center;
+            padding: 0.85rem 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* ============================================
+           HERO PHOTO
+           ============================================ */
+        .hero-photo {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 38%;
+            max-width: 420px;
+            height: 90%;
+            z-index: 1;
+            opacity: 0.45;
+            mask-image: linear-gradient(to left, black 40%, transparent 85%), linear-gradient(to top, black 60%, transparent 95%);
+            -webkit-mask-image: linear-gradient(to left, black 40%, transparent 85%), linear-gradient(to top, black 60%, transparent 95%);
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in;
+            pointer-events: none;
+            filter: brightness(0.9) contrast(1.05);
+        }
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        /* ============================================
+           CLOSING PHOTO
+           ============================================ */
+        .closing-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 2rem;
+            border: 3px solid rgba(127, 153, 178, 0.3);
+            box-shadow: 0 0 30px rgba(127, 153, 178, 0.15);
+        }
+        .closing-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .section { padding: 4rem 1.5rem; }
+            .hero { padding: 5rem 1.5rem 3rem; min-height: 90vh; }
+            .content-grid { grid-template-columns: 1fr; }
+            .speaker-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .speaker-photo { max-width: 280px; margin: 0 auto; }
+            .details-grid { grid-template-columns: 1fr 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
+            .audience-grid { grid-template-columns: 1fr; }
+            .sticky-cta { display: flex; }
+            .nav-cta { display: none; }
+            .dor-disconnect-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+            .dor-disconnect-card { padding: 1.2rem; }
+            .hero-photo { display: none; }
+        }
+        @media (max-width: 480px) {
+            .details-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.75rem; }
+            .shiny-cta { padding: 0.9rem 1.8rem; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== LOADER ========== -->
+    <div class="loader" id="loader">
+        <div class="loader-logo">Turnê <span style="color: var(--aco);">Remodelar</span></div>
+    </div>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-logo">Turnê <span>Remodelar</span></div>
+        <a href="#checkout" class="nav-cta">Garantir Vaga</a>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+        <div class="grid-pattern-container" id="gridPattern"></div>
+        <div class="hero-photo">
+            <img src="img/raniere-palestra-web.jpg" alt="Dr. Raniere palestrando" loading="lazy">
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                16 Mai 2026 &nbsp;·&nbsp; Petrolina, PE
+            </div>
+            <h1>
+                A Odontologia que você pratica ainda funciona em blocos separados.
+                <strong>O paciente não.</strong>
+            </h1>
+            <p class="hero-sub">
+                Uma imersão técnica de um dia para profissionais que querem integrar diagnóstico, planejamento e execução clínica com método estruturado.
+            </p>
+            <div class="hero-cta-group">
+                <a href="#checkout" class="shiny-cta shiny-cta-light">
+                    <span>Garantir Minha Vaga</span>
+                    <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <span class="cta-note">Vagas limitadas à capacidade do espaço</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== DOR (Identification) — V2 ========== -->
+    <section class="section section-light" id="identificacao">
+        <div class="container">
+            <div class="dor-content">
+                <div class="reveal">
+                    <span class="section-label">O Problema</span>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="reveal">
+                    <h2 class="dor-question">Você já se perguntou por que alguns casos travam — mesmo quando a técnica está correta?</h2>
+                </div>
+
+                <div class="reveal">
+                    <p class="dor-text">O problema quase nunca é falta de habilidade. É falta de <span class="highlight-mark">integração entre as disciplinas</span> que tocam o mesmo paciente.</p>
+                </div>
+
+                <!-- Disconnection cards -->
+                <div class="dor-disconnect-grid reveal">
+                    <div class="dor-disconnect-card">
+                        <svg class="disc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 8c-4 0-7 3-7 7v3c0 2 1 4 3 5"/><path d="M22 36c4 0 7-3 7-7v-3c0-2-1-4-3-5"/><path d="M18 22h8" stroke-dasharray="3 3" opacity="0.4"/></svg>
+                        <p class="disc-from">Ortodontista</p>
+                        <span class="disc-break"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M8 6h10v10"/></svg></span>
+                        <p class="disc-to">Periodonto</p>
+                    </div>
+                    <div class="dor-disconnect-card">
+                        <svg class="disc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="22" cy="22" r="12"/><path d="M16 22h12" stroke-dasharray="3 3" opacity="0.4"/><path d="M22 16v12" stroke-dasharray="3 3" opacity="0.4"/></svg>
+                        <p class="disc-from">Implantodontista</p>
+                        <span class="disc-break"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M8 6h10v10"/></svg></span>
+                        <p class="disc-to">Vetor Oclusal</p>
+                    </div>
+                    <div class="dor-disconnect-card">
+                        <svg class="disc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="10" y="10" width="24" height="24" rx="4"/><path d="M18 18l8 8" stroke-dasharray="3 3" opacity="0.4"/><path d="M26 18l-8 8" stroke-dasharray="3 3" opacity="0.4"/></svg>
+                        <p class="disc-from">Protesista</p>
+                        <span class="disc-break"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M8 6h10v10"/></svg></span>
+                        <p class="disc-to">Mecânica Prévia</p>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <p class="dor-text">Cada profissional resolve sua parte — e o <span class="highlight-mark">resultado final não conversa</span>.</p>
+                </div>
+
+                <div class="dor-separator"></div>
+
+                <div class="reveal">
+                    <p class="dor-text">Não é culpa de ninguém em particular. É culpa de uma formação que ensina especialidades como <span class="highlight-mark">gavetas separadas</span>. E o paciente fica preso no meio disso.</p>
+                </div>
+
+                <div class="reveal">
+                    <div class="dor-highlight">
+                        <p>A Turnê Remodelar existe para mudar esse raciocínio.</p>
+                    </div>
+                </div>
+
+                <div class="reveal" style="text-align:center; margin-top:2.5rem;">
+                    <a href="#checkout" class="shiny-cta">
+                        <span>Garantir Minha Vaga</span>
+                        <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTEUDO PROGRAMATICO — V2 ========== -->
+    <section class="section section-white" id="conteudo">
+        <div class="container">
+            <div class="reveal" style="text-align:center;">
+                <span class="section-label">Conteúdo Programático</span>
+                <h2 class="section-title">Um dia inteiro dedicado ao raciocínio<br>que conecta as especialidades.</h2>
+                <div class="section-line section-line-center"></div>
+            </div>
+            <div class="content-grid">
+                <div class="content-card reveal">
+                    <div class="card-number">01</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="16"/><path d="M20 10v10l6 4"/></svg>
+                    <h3 class="card-title">Princípios da Odontologia Integrada</h3>
+                    <p class="card-desc">O raciocínio que deveria estar na base de qualquer planejamento, mas que a graduação nunca organizou de verdade.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">02</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="28" height="28" rx="4"/><path d="M6 20h28"/><path d="M20 6v28"/><circle cx="14" cy="14" r="2" fill="currentColor"/><circle cx="26" cy="26" r="2" fill="currentColor"/></svg>
+                    <h3 class="card-title">Diagnóstico 3D</h3>
+                    <p class="card-desc">Como a tomografia muda completamente a leitura do caso quando você sabe o que procurar.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">03</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8c-3 4-4 10 0 14s10 4 14 0"/><path d="M28 32c3-4 4-10 0-14s-10-4-14 0"/></svg>
+                    <h3 class="card-title">Ortodontia + Periodontia</h3>
+                    <p class="card-desc">A fronteira mais negligenciada da odontologia. Movimentar dente sem considerar o periodonto é decidir no escuro.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">04</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="16" r="8"/><path d="M8 34c0-6.627 5.373-12 12-12s12 5.373 12 12"/><path d="M16 14l2 3 5-5"/></svg>
+                    <h3 class="card-title">Ortodontia + DTM e Oclusão</h3>
+                    <p class="card-desc">Por que tantos pacientes chegam com dor depois de tratamentos tecnicamente corretos.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">05</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 28V14a2 2 0 012-2h16a2 2 0 012 2v14"/><path d="M6 28h28"/><circle cx="20" cy="20" r="4"/><path d="M20 16v-4"/></svg>
+                    <h3 class="card-title">Ortodontia + Implante e Prótese</h3>
+                    <p class="card-desc">O momento exato em que o ortodontista precisa parar, e o que acontece quando ele não para.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">06</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4l4 8h8l-6 6 2 8-8-4-8 4 2-8-6-6h8z"/></svg>
+                    <h3 class="card-title">Ortodontia + Cirurgia Ortognática</h3>
+                    <p class="card-desc">Critérios de decisão que separam indicação real de solução de conveniência.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">07</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6h12v6a6 6 0 01-12 0V6z"/><path d="M14 18c-4 2-6 6-6 10h24c0-4-2-8-6-10"/><circle cx="20" cy="34" r="2"/></svg>
+                    <h3 class="card-title">Ortodontia + Estética</h3>
+                    <p class="card-desc">Quando a estética é consequência do planejamento, e quando é remendo.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">08</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="10" height="10" rx="2"/><rect x="22" y="8" width="10" height="10" rx="2"/><rect x="8" y="22" width="10" height="10" rx="2"/><rect x="22" y="22" width="10" height="10" rx="2"/><path d="M13 18v4"/><path d="M27 18v4"/><path d="M18 13h4"/><path d="M18 27h4"/></svg>
+                    <h3 class="card-title">Miniplacas: Cirurgia à Mecânica Avançada</h3>
+                    <p class="card-desc">O recurso que amplia o repertório clínico de qualquer profissional que lida com casos complexos.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">09</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8h24v24H8z"/><path d="M14 16h12"/><path d="M14 20h12"/><path d="M14 24h8"/></svg>
+                    <h3 class="card-title">Discussão de Casos Clínicos Reais</h3>
+                    <p class="card-desc">Sem edição, sem filtro. Casos que funcionaram, casos que precisaram de ajuste, e o raciocínio por trás de cada decisão.</p>
+                </div>
+            </div>
+            <div class="reveal" style="text-align:center; margin-top:3rem;">
+                <a href="#checkout" class="shiny-cta">
+                    <span>Garantir Minha Vaga</span>
+                    <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PARA QUEM E ========== -->
+    <section class="section section-light" id="publico">
+        <div class="container">
+            <div class="reveal" style="text-align:center;">
+                <span class="section-label">Para Quem É</span>
+                <h2 class="section-title">Essa imersão foi desenhada para profissionais<br>que atuam na linha de frente da decisão clínica.</h2>
+                <div class="section-line section-line-center"></div>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-item reveal">
+                    <div class="audience-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <p class="audience-text"><strong>Ortodontistas</strong> que sentem que a mecânica resolve metade do problema.</p>
+                </div>
+                <div class="audience-item reveal">
+                    <div class="audience-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <p class="audience-text"><strong>Periodontistas</strong> que recebem casos com movimentações questionáveis.</p>
+                </div>
+                <div class="audience-item reveal">
+                    <div class="audience-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <p class="audience-text"><strong>Implantodontistas</strong> que precisam entender o que veio antes para decidir o que vem depois.</p>
+                </div>
+                <div class="audience-item reveal">
+                    <div class="audience-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <p class="audience-text"><strong>Cirurgiões bucomaxilofaciais</strong> que querem integrar seu planejamento ao tratamento completo.</p>
+                </div>
+                <div class="audience-item reveal">
+                    <div class="audience-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <p class="audience-text"><strong>Protesistas e profissionais de estética</strong> que reabilitam sobre bases que nem sempre foram bem construídas.</p>
+                </div>
+                <div class="audience-item reveal">
+                    <div class="audience-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <p class="audience-text"><strong>Clínicos gerais</strong> que coordenam tratamentos multidisciplinares e precisam de critério para isso.</p>
+                </div>
+            </div>
+            <div class="audience-callout reveal">
+                <p>Se o seu trabalho depende de decisões que outro profissional tomou antes — ou que outro profissional vai tomar depois — essa imersão é para você.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== QUEM CONDUZ ========== -->
+    <section class="section section-dark" id="speaker">
+        <div class="grid-pattern-container" id="gridPattern2"></div>
+        <div class="container" style="position:relative; z-index:2;">
+            <div class="reveal">
+                <span class="section-label">Quem Conduz</span>
+                <div class="section-line"></div>
+            </div>
+            <div class="speaker-grid">
+                <div class="speaker-photo reveal" style="background: none; border: none;">
+                    <img src="img/raniere-hero-web.jpg" alt="Dr. Raniere — Ortodontista especialista em casos complexos" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+                </div>
+                <div class="speaker-info reveal">
+                    <h3>Dr. <span>Raniere</span></h3>
+                    <p><strong>Ortodontista com atuação em casos complexos, diagnóstico 3D e ancoragem com miniplacas.</strong></p>
+                    <p>Sua prática clínica é construída sobre integração entre especialidades e decisão estruturada — dois pilares que formam a base da Turnê Remodelar.</p>
+                    <p>Ele não ensina teoria desconectada da prática. <strong>Ensina o raciocínio que usa todos os dias para resolver casos que outros profissionais devolvem.</strong></p>
+                    <div class="speaker-tags">
+                        <span class="speaker-tag">Casos Complexos</span>
+                        <span class="speaker-tag">Diagnóstico 3D</span>
+                        <span class="speaker-tag">Miniplacas</span>
+                        <span class="speaker-tag">Integração Multidisciplinar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== DETALHES DO EVENTO ========== -->
+    <section class="section section-light" id="detalhes">
+        <div class="container">
+            <div class="reveal" style="text-align:center;">
+                <span class="section-label">Detalhes</span>
+                <h2 class="section-title">Informações do Evento</h2>
+                <div class="section-line section-line-center"></div>
+            </div>
+            <div class="details-grid">
+                <div class="detail-card reveal">
+                    <svg class="detail-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="36" height="32" rx="4"/><path d="M16 6v8"/><path d="M32 6v8"/><path d="M6 20h36"/><path d="M18 28h12"/><path d="M24 28v8"/></svg>
+                    <p class="detail-label">Data</p>
+                    <p class="detail-value">16 de maio de 2026</p>
+                </div>
+                <div class="detail-card reveal">
+                    <svg class="detail-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4C16 4 8 12 8 22c0 12 16 22 16 22s16-10 16-22c0-10-8-18-16-18z"/><circle cx="24" cy="20" r="6"/></svg>
+                    <p class="detail-label">Local</p>
+                    <p class="detail-value">Hotel Majestic<br><small style="font-weight:400; color:var(--cinza-medio);">Petrolina, PE</small></p>
+                </div>
+                <div class="detail-card reveal">
+                    <svg class="detail-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M24 12v12l8 4"/></svg>
+                    <p class="detail-label">Formato</p>
+                    <p class="detail-value">Imersão presencial<br><small style="font-weight:400; color:var(--cinza-medio);">1 dia inteiro</small></p>
+                </div>
+                <div class="detail-card reveal">
+                    <svg class="detail-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="16" r="8"/><path d="M10 40c0-7.732 6.268-14 14-14s14 6.268 14 14"/><circle cx="38" cy="18" r="5"/><path d="M43 34c0-4-2.5-7.5-6-9"/></svg>
+                    <p class="detail-label">Público</p>
+                    <p class="detail-value">Profissionais da<br>Odontologia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== INVESTIMENTO ========== -->
+    <section class="section section-white" id="investimento">
+        <div class="container">
+            <div class="reveal" style="text-align:center;">
+                <span class="section-label">Investimento</span>
+                <h2 class="section-title">Escolha sua condição</h2>
+                <div class="section-line section-line-center"></div>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card featured reveal">
+                    <div class="pricing-badge">Early Bird</div>
+                    <p class="pricing-name">Primeiras 20 vagas</p>
+                    <p class="pricing-amount"><span>R$</span>697</p>
+                    <p class="pricing-note">Condição válida para os 20 primeiros inscritos. Sem renovação.</p>
+                </div>
+                <div class="pricing-card reveal">
+                    <p class="pricing-name" style="margin-top:1.5rem;">Valor regular</p>
+                    <p class="pricing-amount" style="color:var(--cinza-medio);"><span>R$</span>997</p>
+                    <p class="pricing-note">Após as 20 primeiras vagas.</p>
+                </div>
+            </div>
+            <div class="pricing-cta-wrapper reveal">
+                <a href="#checkout" class="shiny-cta">
+                    <span>Garantir Minha Vaga</span>
+                    <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <p class="cta-note" style="margin-top:0.8rem; color:var(--cinza-medio);">Inscrição confirmada após pagamento</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FECHAMENTO ========== -->
+    <section class="section section-dark" id="fechamento">
+        <div class="grid-pattern-container" id="gridPattern3"></div>
+        <div class="container" style="position:relative; z-index:2;">
+            <div class="closing-content">
+                <div class="reveal">
+                    <div class="closing-photo">
+                        <img src="img/raniere-principal-web.jpg" alt="Dr. Raniere" loading="lazy">
+                    </div>
+                </div>
+                <div class="reveal">
+                    <p>Você pode continuar tratando cada caso dentro da sua especialidade. Ninguém vai questionar isso.</p>
+                </div>
+                <div class="reveal">
+                    <p>Mas se você já percebeu que os casos mais difíceis não se resolvem com uma disciplina só — e que a distância entre o seu diagnóstico e o resultado final está maior do que deveria — esse é o tipo de imersão que muda a forma como você lê cada caso a partir dali.</p>
+                </div>
+                <div class="reveal">
+                    <p>Não se trata de aprender mais uma técnica. Se trata de aprender a pensar o caso inteiro antes de tocar no paciente.</p>
+                </div>
+                <div class="reveal">
+                    <p class="closing-emphasis">Petrolina. 16 de maio. Hotel Majestic.<br>Uma sala. Um dia. O raciocínio que integra tudo.</p>
+                </div>
+                <div class="closing-cta reveal">
+                    <a href="#checkout" class="shiny-cta shiny-cta-light">
+                        <span>Garantir Minha Vaga</span>
+                        <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-logo">Turnê <span>Remodelar</span></div>
+        <p>&copy; 2026 — Todos os direitos reservados</p>
+    </footer>
+
+    <!-- ========== STICKY CTA (Mobile) ========== -->
+    <div class="sticky-cta" id="stickyCta">
+        <a href="#checkout" class="shiny-cta">
+            <span>Garantir Minha Vaga</span>
+            <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+    </div>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        /* ============================================
+           LOADER
+           ============================================ */
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        /* ============================================
+           NAVBAR SCROLL EFFECT
+           ============================================ */
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        /* ============================================
+           ANIMATED GRID PATTERN with Mouse Reactivity
+           ============================================ */
+        function createAnimatedGrid(containerId, options = {}) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const {
+                cellSize = 50,
+                numSquares = 30,
+                maxOpacity = 0.15,
+                duration = 3000,
+                color = '127, 153, 178'
+            } = options;
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '100%');
+            svg.style.position = 'absolute';
+            svg.style.inset = '0';
+
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            const pattern = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
+            const patternId = 'grid-' + containerId;
+            pattern.setAttribute('id', patternId);
+            pattern.setAttribute('width', cellSize);
+            pattern.setAttribute('height', cellSize);
+            pattern.setAttribute('patternUnits', 'userSpaceOnUse');
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', `M ${cellSize} 0 L 0 0 0 ${cellSize}`);
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke', `rgba(${color}, 0.08)`);
+            path.setAttribute('stroke-width', '1');
+
+            pattern.appendChild(path);
+            defs.appendChild(pattern);
+            svg.appendChild(defs);
+
+            const bgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            bgRect.setAttribute('width', '100%');
+            bgRect.setAttribute('height', '100%');
+            bgRect.setAttribute('fill', `url(#${patternId})`);
+            svg.appendChild(bgRect);
+
+            container.appendChild(svg);
+
+            // Track mouse-reactive squares
+            const mouseSquares = [];
+
+            // Mouse reactivity (desktop only)
+            const hasHover = window.matchMedia('(hover: hover)').matches;
+            if (hasHover) {
+                container.style.pointerEvents = 'auto';
+
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const mx = e.clientX - rect.left;
+                    const my = e.clientY - rect.top;
+                    const radius = 150; // px radius of influence
+
+                    // Create reactive squares around cursor
+                    const col = Math.floor(mx / cellSize);
+                    const row = Math.floor(my / cellSize);
+
+                    for (let dx = -3; dx <= 3; dx++) {
+                        for (let dy = -3; dy <= 3; dy++) {
+                            const cx = (col + dx) * cellSize + cellSize / 2;
+                            const cy = (row + dy) * cellSize + cellSize / 2;
+                            const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
+
+                            if (dist < radius) {
+                                const opacity = (1 - dist / radius) * maxOpacity * 2.5;
+                                const key = `${col+dx}-${row+dy}`;
+
+                                if (!mouseSquares.find(s => s.key === key)) {
+                                    const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                                    r.setAttribute('x', (col + dx) * cellSize + 1);
+                                    r.setAttribute('y', (row + dy) * cellSize + 1);
+                                    r.setAttribute('width', cellSize - 1);
+                                    r.setAttribute('height', cellSize - 1);
+                                    r.setAttribute('fill', `rgba(${color}, ${opacity})`);
+                                    r.style.transition = 'fill 0.3s ease';
+                                    svg.appendChild(r);
+                                    const sq = { key, el: r, timeout: null };
+                                    mouseSquares.push(sq);
+
+                                    // Fade out after delay
+                                    sq.timeout = setTimeout(() => {
+                                        r.setAttribute('fill', `rgba(${color}, 0)`);
+                                        setTimeout(() => {
+                                            r.remove();
+                                            const idx = mouseSquares.indexOf(sq);
+                                            if (idx > -1) mouseSquares.splice(idx, 1);
+                                        }, 400);
+                                    }, 600);
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Auto-animate squares (works on both desktop and mobile)
+            function animateSquares() {
+                const w = container.offsetWidth;
+                const h = container.offsetHeight;
+                const cols = Math.ceil(w / cellSize);
+                const rows = Math.ceil(h / cellSize);
+
+                for (let i = 0; i < numSquares; i++) {
+                    setTimeout(() => {
+                        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                        const col = Math.floor(Math.random() * cols);
+                        const row = Math.floor(Math.random() * rows);
+                        rect.setAttribute('x', col * cellSize + 1);
+                        rect.setAttribute('y', row * cellSize + 1);
+                        rect.setAttribute('width', cellSize - 1);
+                        rect.setAttribute('height', cellSize - 1);
+                        rect.setAttribute('fill', `rgba(${color}, 0)`);
+                        rect.style.transition = `fill ${duration}ms ease`;
+                        svg.appendChild(rect);
+
+                        requestAnimationFrame(() => {
+                            rect.setAttribute('fill', `rgba(${color}, ${maxOpacity})`);
+                        });
+
+                        setTimeout(() => {
+                            rect.setAttribute('fill', `rgba(${color}, 0)`);
+                            setTimeout(() => rect.remove(), duration);
+                        }, duration);
+                    }, i * (duration / numSquares * 2));
+                }
+                setTimeout(animateSquares, duration * 2.5);
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateSquares();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            observer.observe(container);
+        }
+
+        createAnimatedGrid('gridPattern', { numSquares: 40, maxOpacity: 0.12, cellSize: 50 });
+        createAnimatedGrid('gridPattern2', { numSquares: 20, maxOpacity: 0.08, cellSize: 60 });
+        createAnimatedGrid('gridPattern3', { numSquares: 25, maxOpacity: 0.1, cellSize: 55 });
+
+        /* ============================================
+           SCROLL REVEAL (Intersection Observer)
+           ============================================ */
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const parent = entry.target.parentElement;
+                    const siblings = parent.querySelectorAll('.reveal');
+                    let idx = 0;
+                    siblings.forEach((sib, j) => { if (sib === entry.target) idx = j; });
+                    setTimeout(() => entry.target.classList.add('visible'), idx * 100);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+        reveals.forEach(el => revealObserver.observe(el));
+
+        /* ============================================
+           HIGHLIGHT MARK ANIMATION
+           ============================================ */
+        const highlights = document.querySelectorAll('.highlight-mark');
+        const highlightObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('active'), 300);
+                    highlightObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        highlights.forEach(el => highlightObserver.observe(el));
+
+        /* ============================================
+           STICKY CTA (Mobile)
+           ============================================ */
+        const stickyCta = document.getElementById('stickyCta');
+        const heroSection = document.getElementById('hero');
+        if (stickyCta) {
+            const stickyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    stickyCta.classList.toggle('show', !entry.isIntersecting);
+                });
+            }, { threshold: 0 });
+            stickyObserver.observe(heroSection);
+        }
+
+        /* ============================================
+           SMOOTH SCROLL
+           ============================================ */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
