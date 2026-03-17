@@ -471,27 +471,21 @@
             margin: 0 auto 0.8rem;
             color: var(--aco);
         }
-        .dor-disconnect-card .disc-from,
+        .dor-disconnect-card .disc-from {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--marinho);
+            line-height: 1.5;
+            margin-bottom: 0.6rem;
+        }
         .dor-disconnect-card .disc-to {
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--petroleo);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
-        .dor-disconnect-card .disc-break {
-            display: block;
-            margin: 0.4rem 0;
-            font-size: 1.2rem;
-            color: var(--cinza-medio);
-            opacity: 0.5;
-        }
-        .dor-disconnect-card .disc-break svg {
-            width: 24px; height: 24px;
-            animation: break-pulse 2s ease-in-out infinite;
-        }
-        @keyframes break-pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
+        .dor-disconnect-card .disc-to strong {
+            color: var(--aco);
         }
 
         .dor-separator {
@@ -899,6 +893,44 @@
         }
 
         /* ============================================
+           EXPERIENCE SECTION
+           ============================================ */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .experience-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            background: var(--gelo);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .experience-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(44, 65, 86, 0.08);
+        }
+        .experience-icon {
+            width: 48px;
+            height: 48px;
+            color: var(--aco);
+            margin: 0 auto 1.2rem;
+        }
+        .experience-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--marinho);
+            margin-bottom: 0.8rem;
+        }
+        .experience-card p {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--cinza-medio);
+        }
+
+        /* ============================================
            CLOSING PHOTO
            ============================================ */
         .closing-photo {
@@ -929,6 +961,7 @@
             .details-grid { grid-template-columns: 1fr 1fr; }
             .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
             .audience-grid { grid-template-columns: 1fr; }
+            .experience-grid { grid-template-columns: 1fr; }
             .sticky-cta { display: flex; }
             .nav-cta { display: none; }
             .dor-disconnect-grid { grid-template-columns: 1fr; gap: 0.8rem; }
@@ -967,8 +1000,8 @@
                 16 Mai 2026 &nbsp;·&nbsp; Petrolina, PE
             </div>
             <h1>
-                A Odontologia que você pratica ainda funciona em blocos separados.
-                <strong>O paciente não.</strong>
+                Técnica você já tem. O que falta é o raciocínio que conecta tudo
+                <strong>antes de tocar no paciente.</strong>
             </h1>
             <p class="hero-sub">
                 Uma imersão técnica de um dia para profissionais que querem integrar diagnóstico, planejamento e execução clínica com método estruturado.
@@ -1004,26 +1037,23 @@
                 <div class="dor-disconnect-grid reveal">
                     <div class="dor-disconnect-card">
                         <svg class="disc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 8c-4 0-7 3-7 7v3c0 2 1 4 3 5"/><path d="M22 36c4 0 7-3 7-7v-3c0-2-1-4-3-5"/><path d="M18 22h8" stroke-dasharray="3 3" opacity="0.4"/></svg>
-                        <p class="disc-from">Ortodontista</p>
-                        <span class="disc-break"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M8 6h10v10"/></svg></span>
-                        <p class="disc-to">Periodonto</p>
+                        <p class="disc-from">Movimentou o dente sem avaliar o periodonto.</p>
+                        <p class="disc-to"><strong>O resultado? Recessão.</strong></p>
                     </div>
                     <div class="dor-disconnect-card">
                         <svg class="disc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="22" cy="22" r="12"/><path d="M16 22h12" stroke-dasharray="3 3" opacity="0.4"/><path d="M22 16v12" stroke-dasharray="3 3" opacity="0.4"/></svg>
-                        <p class="disc-from">Implantodontista</p>
-                        <span class="disc-break"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M8 6h10v10"/></svg></span>
-                        <p class="disc-to">Vetor Oclusal</p>
+                        <p class="disc-from">Implantou sem considerar a mecânica ortodôntica.</p>
+                        <p class="disc-to"><strong>O resultado? Retrabalho.</strong></p>
                     </div>
                     <div class="dor-disconnect-card">
                         <svg class="disc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="10" y="10" width="24" height="24" rx="4"/><path d="M18 18l8 8" stroke-dasharray="3 3" opacity="0.4"/><path d="M26 18l-8 8" stroke-dasharray="3 3" opacity="0.4"/></svg>
-                        <p class="disc-from">Protesista</p>
-                        <span class="disc-break"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M8 6h10v10"/></svg></span>
-                        <p class="disc-to">Mecânica Prévia</p>
+                        <p class="disc-from">Reabilitou sobre uma base que ninguém planejou junto.</p>
+                        <p class="disc-to"><strong>O resultado? Frustração.</strong></p>
                     </div>
                 </div>
 
                 <div class="reveal">
-                    <p class="dor-text">Cada profissional resolve sua parte — e o <span class="highlight-mark">resultado final não conversa</span>.</p>
+                    <p class="dor-text">Cada profissional resolve sua parte — e o <span class="highlight-mark">resultado final não se conecta</span>.</p>
                 </div>
 
                 <div class="dor-separator"></div>
@@ -1073,7 +1103,7 @@
                     <div class="card-number">03</div>
                     <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8c-3 4-4 10 0 14s10 4 14 0"/><path d="M28 32c3-4 4-10 0-14s-10-4-14 0"/></svg>
                     <h3 class="card-title">Ortodontia + Periodontia</h3>
-                    <p class="card-desc">A fronteira mais negligenciada da odontologia. Movimentar dente sem considerar o periodonto é decidir no escuro.</p>
+                    <p class="card-desc">Visão ampliada da integração entre a Ortodontia e Periodontia para além das abordagens de controle de placa bacteriana em consequência da presença cada vez mais comum da recessão gengival antes, durante e após o tratamento ortodôntico.</p>
                 </div>
                 <div class="content-card reveal">
                     <div class="card-number">04</div>
@@ -1085,7 +1115,7 @@
                     <div class="card-number">05</div>
                     <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 28V14a2 2 0 012-2h16a2 2 0 012 2v14"/><path d="M6 28h28"/><circle cx="20" cy="20" r="4"/><path d="M20 16v-4"/></svg>
                     <h3 class="card-title">Ortodontia + Implante e Prótese</h3>
-                    <p class="card-desc">O momento exato em que o ortodontista precisa parar, e o que acontece quando ele não para.</p>
+                    <p class="card-desc">A decisão que pode salvar — ou comprometer — o caso inteiro. Timing, sequência e os erros que ninguém discute.</p>
                 </div>
                 <div class="content-card reveal">
                     <div class="card-number">06</div>
@@ -1097,7 +1127,7 @@
                     <div class="card-number">07</div>
                     <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6h12v6a6 6 0 01-12 0V6z"/><path d="M14 18c-4 2-6 6-6 10h24c0-4-2-8-6-10"/><circle cx="20" cy="34" r="2"/></svg>
                     <h3 class="card-title">Ortodontia + Estética</h3>
-                    <p class="card-desc">Quando a estética é consequência do planejamento, e quando é remendo.</p>
+                    <p class="card-desc">Quando a estética é consequência do planejamento e quando é improviso.</p>
                 </div>
                 <div class="content-card reveal">
                     <div class="card-number">08</div>
@@ -1161,6 +1191,45 @@
         </div>
     </section>
 
+    <!-- ========== EXPERIÊNCIA ========== -->
+    <section class="section section-white" id="experiencia">
+        <div class="container">
+            <div class="reveal" style="text-align:center;">
+                <span class="section-label">Mais que um Curso</span>
+                <h2 class="section-title">Uma experiência completa<br>para profissionais que levam a sério.</h2>
+                <div class="section-line section-line-center"></div>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-card reveal">
+                    <svg class="experience-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M24 6v4"/><path d="M24 38v4"/><path d="M6 24h4"/><path d="M38 24h4"/>
+                        <circle cx="24" cy="24" r="10"/>
+                        <path d="M24 18v6l4 2"/>
+                    </svg>
+                    <h3>Imersão Clínica Intensiva</h3>
+                    <p>Um dia inteiro de conteúdo denso, com casos reais e raciocínio aplicável desde a segunda-feira seguinte.</p>
+                </div>
+                <div class="experience-card reveal">
+                    <svg class="experience-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="16" cy="16" r="6"/><circle cx="32" cy="16" r="6"/><circle cx="24" cy="32" r="6"/>
+                        <path d="M20 20l4 8"/><path d="M28 20l-4 8"/>
+                    </svg>
+                    <h3>Networking de Alto Nível</h3>
+                    <p>Profissionais de diversas especialidades no mesmo ambiente. Conexões que viram parcerias clínicas reais.</p>
+                </div>
+                <div class="experience-card reveal">
+                    <svg class="experience-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 36V20l12-10 12 10v16"/><path d="M20 36v-8h8v8"/>
+                        <path d="M8 42h32"/><circle cx="36" cy="12" r="4" fill="none"/>
+                        <path d="M36 10v4"/><path d="M34 12h4"/>
+                    </svg>
+                    <h3>Experiência Premium</h3>
+                    <p>Ambiente exclusivo, coffee break, e uma confraternização especial ao final — porque grandes profissionais merecem grandes momentos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ========== QUEM CONDUZ ========== -->
     <section class="section section-dark" id="speaker">
         <div class="grid-pattern-container" id="gridPattern2"></div>
@@ -1171,10 +1240,10 @@
             </div>
             <div class="speaker-grid">
                 <div class="speaker-photo reveal" style="background: none; border: none;">
-                    <img src="img/raniere-hero-web.jpg" alt="Dr. Raniere — Ortodontista especialista em casos complexos" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+                    <img src="img/raniere-poltrona-web.jpg" alt="Dr. Raniere Sousa — Ortodontista especialista em casos complexos" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
                 </div>
                 <div class="speaker-info reveal">
-                    <h3>Dr. <span>Raniere</span></h3>
+                    <h3>Dr. <span>Raniere Sousa</span></h3>
                     <p><strong>Ortodontista com atuação em casos complexos, diagnóstico 3D e ancoragem com miniplacas.</strong></p>
                     <p>Sua prática clínica é construída sobre integração entre especialidades e decisão estruturada — dois pilares que formam a base da Turnê Remodelar.</p>
                     <p>Ele não ensina teoria desconectada da prática. <strong>Ensina o raciocínio que usa todos os dias para resolver casos que outros profissionais devolvem.</strong></p>
@@ -1206,7 +1275,7 @@
                 <div class="detail-card reveal">
                     <svg class="detail-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4C16 4 8 12 8 22c0 12 16 22 16 22s16-10 16-22c0-10-8-18-16-18z"/><circle cx="24" cy="20" r="6"/></svg>
                     <p class="detail-label">Local</p>
-                    <p class="detail-value">Hotel Majestic<br><small style="font-weight:400; color:var(--cinza-medio);">Petrolina, PE</small></p>
+                    <p class="detail-value">Hotel Nobile Suites Del Rio<br><small style="font-weight:400; color:var(--cinza-medio);">Petrolina, PE</small></p>
                 </div>
                 <div class="detail-card reveal">
                     <svg class="detail-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M24 12v12l8 4"/></svg>
@@ -1273,7 +1342,7 @@
                     <p>Não se trata de aprender mais uma técnica. Se trata de aprender a pensar o caso inteiro antes de tocar no paciente.</p>
                 </div>
                 <div class="reveal">
-                    <p class="closing-emphasis">Petrolina. 16 de maio. Hotel Majestic.<br>Uma sala. Um dia. O raciocínio que integra tudo.</p>
+                    <p class="closing-emphasis">Petrolina. 16 de maio. Hotel Nobile Suites Del Rio.<br>Uma sala. Um dia. O raciocínio que integra tudo.</p>
                 </div>
                 <div class="closing-cta reveal">
                     <a href="#checkout" class="shiny-cta shiny-cta-light">
