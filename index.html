@@ -562,6 +562,14 @@
             margin-bottom: 0.6rem;
             line-height: 1.3;
         }
+        .card-subtitle {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--aco);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
         .card-desc {
             font-size: 0.88rem;
             line-height: 1.7;
@@ -800,12 +808,24 @@
             color: var(--petroleo);
             font-style: italic;
         }
-        .testimonials-note {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.85rem;
+        .section-subtitle {
+            font-size: 1.05rem;
             color: var(--cinza-medio);
-            font-style: italic;
+            margin-top: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+        .testimonial-flags-center {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .testimonial-flags-center svg {
+            width: 30px;
+            height: 22px;
+            border-radius: 3px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
         }
 
         /* ============================================
@@ -1110,7 +1130,7 @@
     <section class="hero" id="hero">
         <div class="grid-pattern-container" id="gridPattern"></div>
         <div class="hero-photo">
-            <img src="img/raniere-palestra-web.jpg" alt="Dr. Raniere palestrando" loading="lazy">
+            <img src="img/raniere-hero-new.jpg" alt="Dr. Raniere palestrando em evento" loading="lazy">
         </div>
         <div class="hero-content">
             <div class="hero-badge">
@@ -1202,47 +1222,55 @@
             <div class="reveal" style="text-align:center;">
                 <span class="section-label">Confiança</span>
                 <h2 class="section-title">Veja quem já confiou na mentoria.</h2>
+                <p class="section-subtitle">Mais de 20 profissionais mentorados em 03 países</p>
+                <div class="testimonial-flags-center">
+                    <!-- Brasil -->
+                    <svg viewBox="0 0 24 18"><rect width="24" height="18" fill="#009739"/><path d="M12 2L22 9L12 16L2 9Z" fill="#FEDD00"/><circle cx="12" cy="9" r="4" fill="#012169"/><path d="M8.5 8.5c2-1 5-1 7 0" stroke="#fff" stroke-width="0.5" fill="none"/></svg>
+                    <!-- Portugal -->
+                    <svg viewBox="0 0 24 18"><rect width="9" height="18" fill="#006600"/><rect x="9" width="15" height="18" fill="#FF0000"/><circle cx="9" cy="9" r="3.5" fill="#FEDD00" stroke="#FF0000" stroke-width="0.3"/></svg>
+                    <!-- Peru -->
+                    <svg viewBox="0 0 24 18"><rect width="7" height="18" fill="#D91023"/><rect x="7" width="10" height="18" fill="#fff"/><rect x="17" width="7" height="18" fill="#D91023"/></svg>
+                </div>
                 <div class="section-line section-line-center"></div>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card reveal">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.314 2.686-6 6-6s6 2.686 6 6"/></svg>
+                            <img src="img/danuzio-parente.jpg" alt="Danuzio Parente">
                         </div>
                         <div>
-                            <p class="testimonial-name">Mentorado 1 <svg class="testimonial-flag" viewBox="0 0 24 18"><rect width="24" height="18" fill="#009739"/><path d="M12 2L22 9L12 16L2 9Z" fill="#FEDD00"/><circle cx="12" cy="9" r="4" fill="#012169"/></svg></p>
-                            <p class="testimonial-role">Ortodontista — Brasil</p>
+                            <p class="testimonial-name">Danuzio Parente</p>
+                            <p class="testimonial-role">Petrolina, PE</p>
                         </div>
                     </div>
-                    <p class="testimonial-text">"Depoimento será inserido assim que o material for enviado pelo Dr. Raniere."</p>
+                    <p class="testimonial-text">"Entregou mais do que EU ESPERAVA. Raniere é apaixonado por odontologia e isso faz ele entender o que nós buscamos. Um dos maiores aprendizados é que 'função bem ajustada, traz estética alinhada'."</p>
                 </div>
                 <div class="testimonial-card reveal">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.314 2.686-6 6-6s6 2.686 6 6"/></svg>
+                            <img src="img/placido-angelim.jpg" alt="Placido Angelim">
                         </div>
                         <div>
-                            <p class="testimonial-name">Mentorado 2 <svg class="testimonial-flag" viewBox="0 0 24 18"><rect width="9" height="18" fill="#006600"/><rect x="9" width="15" height="18" fill="#FF0000"/><circle cx="9" cy="9" r="3.5" fill="#FEDD00" stroke="#FF0000" stroke-width="0.3"/></svg></p>
-                            <p class="testimonial-role">Especialista — Portugal</p>
+                            <p class="testimonial-name">Placido Angelim</p>
+                            <p class="testimonial-role">Salgueiro, PE</p>
                         </div>
                     </div>
-                    <p class="testimonial-text">"Depoimento será inserido assim que o material for enviado pelo Dr. Raniere."</p>
+                    <p class="testimonial-text">"Superou todas as expectativas. A mentoria trouxe conhecimento avançado sobre diagnóstico e mini placas, uma odontologia que só é possível aprender com quem vive isso na prática."</p>
                 </div>
                 <div class="testimonial-card reveal">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.314 2.686-6 6-6s6 2.686 6 6"/></svg>
+                            <img src="img/lorenna-cafe.jpg" alt="Lorenna Café">
                         </div>
                         <div>
-                            <p class="testimonial-name">Mentorado 3 <svg class="testimonial-flag" viewBox="0 0 24 18"><rect width="7" height="18" fill="#D91023"/><rect x="7" width="10" height="18" fill="#fff"/><rect x="17" width="7" height="18" fill="#D91023"/></svg></p>
-                            <p class="testimonial-role">Especialista — Peru</p>
+                            <p class="testimonial-name">Lorenna Café</p>
+                            <p class="testimonial-role">Petrolina, PE</p>
                         </div>
                     </div>
-                    <p class="testimonial-text">"Depoimento será inserido assim que o material for enviado pelo Dr. Raniere."</p>
+                    <p class="testimonial-text">"Remodelar me mostrou uma ortodontia com maiores possibilidades, aliando ciência a vivência clínica do nosso incrível professor."</p>
                 </div>
             </div>
-            <p class="testimonials-note reveal">Fotos e depoimentos reais serão adicionados em breve.</p>
         </div>
     </section>
 
@@ -1308,6 +1336,20 @@
                     <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8h24v24H8z"/><path d="M14 16h12"/><path d="M14 20h12"/><path d="M14 24h8"/></svg>
                     <h3 class="card-title">Discussão de Casos Clínicos Reais</h3>
                     <p class="card-desc">Sem edição, sem filtro. Casos que funcionaram, casos que precisaram de ajuste, e o raciocínio por trás de cada decisão.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">10</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12l12-6 12 6v4l-12 6-12-6v-4z"/><path d="M8 20l12 6 12-6"/><path d="M8 26l12 6 12-6"/></svg>
+                    <h3 class="card-title">Marketing & Posicionamento</h3>
+                    <p class="card-subtitle">com Erick Santos</p>
+                    <p class="card-desc">Como se diferenciar na era do conteúdo com IA. Por que todo dentista parece igual no digital, IA como alavanca de autoridade, e marketing de performance aplicado a clínicas.</p>
+                </div>
+                <div class="content-card reveal">
+                    <div class="card-number">11</div>
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="24" height="28" rx="3"/><path d="M14 14h12"/><path d="M14 20h8"/><path d="M14 26h10"/><circle cx="28" cy="28" r="6" fill="none"/><path d="M26 26l2 2 3-3"/></svg>
+                    <h3 class="card-title">Gestão de Receita & Tributário</h3>
+                    <p class="card-subtitle">com Nexus Odonto</p>
+                    <p class="card-desc">Reforma tributária na prática. O que muda para dentistas, como reduzir carga fiscal legalmente, e gestão financeira que libera o profissional para focar no paciente.</p>
                 </div>
             </div>
             <div class="reveal" style="text-align:center; margin-top:3rem;">
@@ -1488,7 +1530,7 @@
                 <div class="pricing-card reveal">
                     <p class="pricing-name" style="margin-top:1.5rem;">Valor regular</p>
                     <p class="pricing-amount" style="color:var(--cinza-medio);"><span>R$</span>997</p>
-                    <p class="pricing-note">Após as 20 primeiras vagas.</p>
+                    <p class="pricing-note">Demais 40 vagas.</p>
                 </div>
             </div>
             <div class="pricing-cta-wrapper reveal">
