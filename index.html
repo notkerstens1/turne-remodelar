@@ -691,6 +691,124 @@
         }
 
         /* ============================================
+           SPEAKER: INTERNATIONAL FLAGS
+           ============================================ */
+        .speaker-international {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(127,153,178,0.08);
+            border-radius: 10px;
+            border: 1px solid rgba(127,153,178,0.15);
+        }
+        .speaker-flags {
+            display: flex;
+            gap: 0.4rem;
+        }
+        .speaker-flags svg {
+            width: 24px;
+            height: 18px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .speaker-international span {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--nevoa);
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================
+           SECTION: DEPOIMENTOS
+           ============================================ */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .testimonial-card {
+            background: var(--branco);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 20px rgba(44,65,86,0.06);
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--aco);
+            opacity: 0.1;
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--petroleo), var(--aco));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .testimonial-avatar svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--branco);
+            fill: none;
+        }
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--marinho);
+        }
+        .testimonial-role {
+            font-size: 0.75rem;
+            color: var(--cinza-medio);
+            margin-top: 0.15rem;
+        }
+        .testimonial-flag {
+            width: 18px;
+            height: 13px;
+            border-radius: 2px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        }
+        .testimonial-text {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--petroleo);
+            font-style: italic;
+        }
+        .testimonials-note {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--cinza-medio);
+            font-style: italic;
+        }
+
+        /* ============================================
            SECTION: DETALHES EVENTO
            ============================================ */
         .details-grid {
@@ -1078,6 +1196,56 @@
         </div>
     </section>
 
+    <!-- ========== DEPOIMENTOS ========== -->
+    <section class="section section-white" id="depoimentos">
+        <div class="container">
+            <div class="reveal" style="text-align:center;">
+                <span class="section-label">Confiança</span>
+                <h2 class="section-title">Veja quem já confiou na mentoria.</h2>
+                <div class="section-line section-line-center"></div>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.314 2.686-6 6-6s6 2.686 6 6"/></svg>
+                        </div>
+                        <div>
+                            <p class="testimonial-name">Mentorado 1 <svg class="testimonial-flag" viewBox="0 0 24 18"><rect width="24" height="18" fill="#009739"/><path d="M12 2L22 9L12 16L2 9Z" fill="#FEDD00"/><circle cx="12" cy="9" r="4" fill="#012169"/></svg></p>
+                            <p class="testimonial-role">Ortodontista — Brasil</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Depoimento será inserido assim que o material for enviado pelo Dr. Raniere."</p>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.314 2.686-6 6-6s6 2.686 6 6"/></svg>
+                        </div>
+                        <div>
+                            <p class="testimonial-name">Mentorado 2 <svg class="testimonial-flag" viewBox="0 0 24 18"><rect width="9" height="18" fill="#006600"/><rect x="9" width="15" height="18" fill="#FF0000"/><circle cx="9" cy="9" r="3.5" fill="#FEDD00" stroke="#FF0000" stroke-width="0.3"/></svg></p>
+                            <p class="testimonial-role">Especialista — Portugal</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Depoimento será inserido assim que o material for enviado pelo Dr. Raniere."</p>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.314 2.686-6 6-6s6 2.686 6 6"/></svg>
+                        </div>
+                        <div>
+                            <p class="testimonial-name">Mentorado 3 <svg class="testimonial-flag" viewBox="0 0 24 18"><rect width="7" height="18" fill="#D91023"/><rect x="7" width="10" height="18" fill="#fff"/><rect x="17" width="7" height="18" fill="#D91023"/></svg></p>
+                            <p class="testimonial-role">Especialista — Peru</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Depoimento será inserido assim que o material for enviado pelo Dr. Raniere."</p>
+                </div>
+            </div>
+            <p class="testimonials-note reveal">Fotos e depoimentos reais serão adicionados em breve.</p>
+        </div>
+    </section>
+
     <!-- ========== CONTEUDO PROGRAMATICO — V2 ========== -->
     <section class="section section-white" id="conteudo">
         <div class="container">
@@ -1252,6 +1420,17 @@
                         <span class="speaker-tag">Diagnóstico 3D</span>
                         <span class="speaker-tag">Miniplacas</span>
                         <span class="speaker-tag">Integração Multidisciplinar</span>
+                    </div>
+                    <div class="speaker-international">
+                        <div class="speaker-flags">
+                            <!-- Brasil -->
+                            <svg viewBox="0 0 24 18"><rect width="24" height="18" fill="#009739"/><path d="M12 2L22 9L12 16L2 9Z" fill="#FEDD00"/><circle cx="12" cy="9" r="4" fill="#012169"/><path d="M8.5 8.5c2-1 5-1 7 0" stroke="#fff" stroke-width="0.5" fill="none"/></svg>
+                            <!-- Portugal -->
+                            <svg viewBox="0 0 24 18"><rect width="9" height="18" fill="#006600"/><rect x="9" width="15" height="18" fill="#FF0000"/><circle cx="9" cy="9" r="3.5" fill="#FEDD00" stroke="#FF0000" stroke-width="0.3"/></svg>
+                            <!-- Peru -->
+                            <svg viewBox="0 0 24 18"><rect width="7" height="18" fill="#D91023"/><rect x="7" width="10" height="18" fill="#fff"/><rect x="17" width="7" height="18" fill="#D91023"/></svg>
+                        </div>
+                        <span>Mentorados em mais de 3 países</span>
                     </div>
                 </div>
             </div>
