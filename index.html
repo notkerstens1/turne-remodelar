@@ -201,12 +201,83 @@
 
         @keyframes gradient-angle { to { --gradient-angle: 360deg; } }
 
-        /* Light variant for dark backgrounds */
-        .shiny-cta-light {
-            --shiny-cta-bg: rgba(255,255,255,0.08);
-            --shiny-cta-bg-subtle: rgba(255,255,255,0.15);
-            --shiny-cta-highlight: #7F99B2;
-            --shiny-cta-highlight-subtle: #D2D7DB;
+        /* Light variant removed — all CTAs use solid background */
+
+        /* ============================================
+           SECTION: BÔNUS AO VIVO
+           ============================================ */
+        .bonus-section {
+            background: var(--gelo);
+            padding: 5rem 2rem;
+        }
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .bonus-card {
+            background: var(--branco);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 4px 24px rgba(44,65,86,0.08);
+            border: 1.5px solid rgba(127,153,178,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .bonus-card::before {
+            content: 'BÔNUS';
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--aco);
+            opacity: 0.5;
+        }
+        .bonus-card .card-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--aco);
+            margin-bottom: 0.8rem;
+            opacity: 0.3;
+        }
+        .bonus-card .card-icon {
+            width: 40px;
+            height: 40px;
+            color: var(--aco);
+            margin-bottom: 1rem;
+        }
+        .bonus-card .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--marinho);
+            margin-bottom: 0.3rem;
+        }
+        .bonus-card .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--aco);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .bonus-card .card-desc {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--petroleo);
+            margin-bottom: 0.8rem;
+        }
+        .bonus-card .card-bio {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--cinza-medio);
+            border-top: 1px solid rgba(127,153,178,0.15);
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .bonus-grid { grid-template-columns: 1fr; }
         }
 
         /* ============================================
@@ -905,7 +976,7 @@
            ============================================ */
         .sponsors-section {
             background: var(--branco);
-            padding: 3.5rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
             border-top: 1px solid var(--nevoa);
         }
@@ -918,15 +989,14 @@
             flex-wrap: wrap;
         }
         .sponsor-logo {
-            height: 60px;
+            height: 90px;
             width: auto;
             object-fit: contain;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+            opacity: 1;
+            transition: transform 0.3s ease;
         }
         .sponsor-logo:hover {
-            opacity: 1;
-            filter: grayscale(0%);
+            transform: scale(1.05);
         }
 
         /* ============================================
@@ -983,9 +1053,16 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0.25;
+            opacity: 0.15;
             pointer-events: none;
-            filter: brightness(0.8) contrast(1.1);
+            filter: brightness(0.7) contrast(1.1);
+        }
+        .hero-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(44,65,86,0.3) 0%, rgba(44,65,86,0.85) 100%);
+            z-index: 2;
         }
         .hero-photo img {
             width: 100%;
@@ -1109,7 +1186,7 @@
                 Uma imersão técnica de um dia para profissionais que querem integrar diagnóstico, planejamento e execução clínica com método estruturado.
             </p>
             <div class="hero-cta-group">
-                <a href="#checkout" class="shiny-cta shiny-cta-light">
+                <a href="#checkout" class="shiny-cta">
                     <span>Garantir Minha Vaga</span>
                     <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
@@ -1195,7 +1272,6 @@
                     <!-- Peru -->
                     <svg viewBox="0 0 24 18"><rect width="7" height="18" fill="#D91023"/><rect x="7" width="10" height="18" fill="#fff"/><rect x="17" width="7" height="18" fill="#D91023"/></svg>
                 </div>
-                <div class="section-line section-line-center"></div>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card reveal">
@@ -1301,28 +1377,40 @@
                     <h3 class="card-title">Discussão de Casos Clínicos Reais</h3>
                     <p class="card-desc">Sem edição, sem filtro. Casos que funcionaram, casos que precisaram de ajuste, e o raciocínio por trás de cada decisão.</p>
                 </div>
-                <div class="content-card reveal">
-                    <div class="card-number">10</div>
-                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12l12-6 12 6v4l-12 6-12-6v-4z"/><path d="M8 20l12 6 12-6"/><path d="M8 26l12 6 12-6"/></svg>
-                    <h3 class="card-title">Marketing & Posicionamento</h3>
-                    <p class="card-subtitle">com Erick Santos</p>
-                    <p class="card-desc">Como se diferenciar na era do conteúdo com IA. Por que todo dentista parece igual no digital, IA como alavanca de autoridade, e marketing de performance que transforma tráfego pago em agenda preenchida.</p>
-                    <p class="card-bio">Fundador da Rapport e sócio da LIV Energia Solar — operações que somaram R$2 milhões em 2025. Quase 10 anos de assessoria de marketing de performance com resultados documentados para clínicas e negócios de alto ticket.</p>
-                </div>
-                <div class="content-card reveal">
-                    <div class="card-number">11</div>
-                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="24" height="28" rx="3"/><path d="M14 14h12"/><path d="M14 20h8"/><path d="M14 26h10"/><circle cx="28" cy="28" r="6" fill="none"/><path d="M26 26l2 2 3-3"/></svg>
-                    <h3 class="card-title">Gestão de Receita & Tributário</h3>
-                    <p class="card-subtitle">com Nexus Odonto</p>
-                    <p class="card-desc">Reforma tributária na prática. O que muda para dentistas e consultórios, como reduzir a carga fiscal de forma legal e estruturada, e gestão financeira que libera o profissional para focar no paciente.</p>
-                    <p class="card-bio">Consultoria fiscal e contábil criada exclusivamente para profissionais da odontologia. Soluções contábeis estratégicas para pagar menos imposto, ter mais controle das finanças e crescer com segurança.</p>
-                </div>
             </div>
             <div class="reveal" style="text-align:center; margin-top:3rem;">
                 <a href="#checkout" class="shiny-cta">
                     <span>Garantir Minha Vaga</span>
                     <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== BÔNUS AO VIVO ========== -->
+    <section class="bonus-section" id="bonus">
+        <div class="container">
+            <div class="reveal" style="text-align:center;">
+                <span class="section-label">Bônus Exclusivos</span>
+                <h2 class="section-title">Especialistas ao vivo para<br>potencializar seu consultório.</h2>
+                <p class="section-subtitle">Além da clínica: marketing e gestão financeira com quem vive isso na prática.</p>
+                <div class="section-line section-line-center"></div>
+            </div>
+            <div class="bonus-grid">
+                <div class="bonus-card reveal">
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12l12-6 12 6v4l-12 6-12-6v-4z"/><path d="M8 20l12 6 12-6"/><path d="M8 26l12 6 12-6"/></svg>
+                    <h3 class="card-title">Marketing & Posicionamento</h3>
+                    <p class="card-subtitle">com Erick Santos</p>
+                    <p class="card-desc">Como se diferenciar na era do conteúdo com IA. Por que todo dentista parece igual no digital, IA como alavanca de autoridade, e marketing de performance que transforma tráfego pago em agenda preenchida.</p>
+                    <p class="card-bio">Fundador da Rapport e sócio da LIV Energia Solar — operações que somaram R$2 milhões em 2025. Quase 10 anos de assessoria de marketing de performance com resultados documentados para clínicas e negócios de alto ticket.</p>
+                </div>
+                <div class="bonus-card reveal">
+                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="24" height="28" rx="3"/><path d="M14 14h12"/><path d="M14 20h8"/><path d="M14 26h10"/><circle cx="28" cy="28" r="6" fill="none"/><path d="M26 26l2 2 3-3"/></svg>
+                    <h3 class="card-title">Gestão de Receita & Tributário</h3>
+                    <p class="card-subtitle">com Nexus Odonto</p>
+                    <p class="card-desc">Reforma tributária na prática. O que muda para dentistas e consultórios, como reduzir a carga fiscal de forma legal e estruturada, e gestão financeira que libera o profissional para focar no paciente.</p>
+                    <p class="card-bio">Consultoria fiscal e contábil criada exclusivamente para profissionais da odontologia. Soluções contábeis estratégicas para pagar menos imposto, ter mais controle das finanças e crescer com segurança.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1532,7 +1620,7 @@
                     <p class="closing-emphasis">Petrolina. 16 de maio. Hotel Nobile Suites Del Rio.<br>Uma sala. Um dia. O raciocínio que integra tudo.</p>
                 </div>
                 <div class="closing-cta reveal">
-                    <a href="#checkout" class="shiny-cta shiny-cta-light">
+                    <a href="#checkout" class="shiny-cta">
                         <span>Garantir Minha Vaga</span>
                         <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>
