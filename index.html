@@ -989,14 +989,16 @@
             flex-wrap: wrap;
         }
         .sponsor-logo {
-            height: 90px;
+            height: 130px;
             width: auto;
             object-fit: contain;
             opacity: 1;
-            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 20px rgba(127,153,178,0.35)) drop-shadow(0 0 45px rgba(127,153,178,0.15));
+            transition: transform 0.3s ease, filter 0.3s ease;
         }
         .sponsor-logo:hover {
             transform: scale(1.05);
+            filter: drop-shadow(0 0 28px rgba(127,153,178,0.5)) drop-shadow(0 0 55px rgba(127,153,178,0.25));
         }
 
         /* ============================================
@@ -1571,7 +1573,7 @@
         <div class="container">
             <div class="reveal" style="text-align:center;">
                 <span class="section-label">Investimento</span>
-                <h2 class="section-title">Escolha sua condição</h2>
+                <h2 class="section-title">Garanta essa oportunidade única</h2>
                 <div class="section-line section-line-center"></div>
             </div>
             <div class="pricing-grid">
