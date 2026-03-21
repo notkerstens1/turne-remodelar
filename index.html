@@ -276,6 +276,20 @@
             padding-top: 0.8rem;
             margin-top: 0.5rem;
         }
+        .bonus-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .bonus-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 2px 12px rgba(44,65,86,0.15);
+        }
         @media (max-width: 768px) {
             .bonus-grid { grid-template-columns: 1fr; }
         }
@@ -344,6 +358,7 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeUp 0.8s ease forwards 0.7s;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.4);
         }
         .hero h1 strong { font-weight: 700; color: var(--aco); display: block; }
         .hero-sub {
@@ -356,6 +371,7 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeUp 0.8s ease forwards 0.9s;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.35);
         }
         .hero-cta-group {
             display: flex;
@@ -1055,15 +1071,15 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0.15;
+            opacity: 0.3;
             pointer-events: none;
-            filter: brightness(0.7) contrast(1.1);
+            filter: contrast(1.05);
         }
         .hero-photo::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center, rgba(44,65,86,0.3) 0%, rgba(44,65,86,0.85) 100%);
+            background: radial-gradient(ellipse at center, rgba(44,65,86,0.15) 0%, rgba(44,65,86,0.75) 100%);
             z-index: 2;
         }
         .hero-photo img {
@@ -1147,7 +1163,7 @@
             .nav-cta { display: none; }
             .dor-disconnect-grid { grid-template-columns: 1fr; gap: 0.8rem; }
             .dor-disconnect-card { padding: 1.2rem; }
-            .hero-photo { opacity: 0.2; }
+            .hero-photo { opacity: 0.25; }
         }
         @media (max-width: 480px) {
             .details-grid { grid-template-columns: 1fr; }
@@ -1265,7 +1281,7 @@
             <div class="reveal" style="text-align:center;">
                 <span class="section-label">Confiança</span>
                 <h2 class="section-title">Veja quem já confiou na mentoria.</h2>
-                <p class="section-subtitle">Mais de 20 profissionais mentorados em 03 países</p>
+                <p class="section-subtitle">Mentorados em 03 países</p>
                 <div class="testimonial-flags-center">
                     <!-- Brasil -->
                     <svg viewBox="0 0 24 18"><rect width="24" height="18" fill="#009739"/><path d="M12 2L22 9L12 16L2 9Z" fill="#FEDD00"/><circle cx="12" cy="9" r="4" fill="#012169"/><path d="M8.5 8.5c2-1 5-1 7 0" stroke="#fff" stroke-width="0.5" fill="none"/></svg>
@@ -1400,16 +1416,24 @@
             </div>
             <div class="bonus-grid">
                 <div class="bonus-card reveal">
-                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12l12-6 12 6v4l-12 6-12-6v-4z"/><path d="M8 20l12 6 12-6"/><path d="M8 26l12 6 12-6"/></svg>
-                    <h3 class="card-title">Marketing & Posicionamento</h3>
-                    <p class="card-subtitle">com Erick Santos</p>
+                    <div class="bonus-header">
+                        <img src="img/erick-santos.jpg" alt="Erick Santos" class="bonus-avatar">
+                        <div>
+                            <h3 class="card-title">Marketing & Posicionamento</h3>
+                            <p class="card-subtitle">com Erick Santos</p>
+                        </div>
+                    </div>
                     <p class="card-desc">Como se diferenciar na era do conteúdo com IA. Por que todo dentista parece igual no digital, IA como alavanca de autoridade, e marketing de performance que transforma tráfego pago em agenda preenchida.</p>
                     <p class="card-bio">Fundador da Rapport e sócio da LIV Energia Solar — operações que somaram R$2 milhões em 2025. Quase 10 anos de assessoria de marketing de performance com resultados documentados para clínicas e negócios de alto ticket.</p>
                 </div>
                 <div class="bonus-card reveal">
-                    <svg class="card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="24" height="28" rx="3"/><path d="M14 14h12"/><path d="M14 20h8"/><path d="M14 26h10"/><circle cx="28" cy="28" r="6" fill="none"/><path d="M26 26l2 2 3-3"/></svg>
-                    <h3 class="card-title">Gestão de Receita & Tributário</h3>
-                    <p class="card-subtitle">com Nexus Odonto</p>
+                    <div class="bonus-header">
+                        <img src="img/alex-gomes.jpg" alt="Alex Gomes" class="bonus-avatar">
+                        <div>
+                            <h3 class="card-title">Gestão de Receita & Tributário</h3>
+                            <p class="card-subtitle">com Alex Gomes — Nexus Odonto</p>
+                        </div>
+                    </div>
                     <p class="card-desc">Reforma tributária na prática. O que muda para dentistas e consultórios, como reduzir a carga fiscal de forma legal e estruturada, e gestão financeira que libera o profissional para focar no paciente.</p>
                     <p class="card-bio">Consultoria fiscal e contábil criada exclusivamente para profissionais da odontologia. Soluções contábeis estratégicas para pagar menos imposto, ter mais controle das finanças e crescer com segurança.</p>
                 </div>
