@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turnê Remodelar — Imersão Petrolina</title>
     <meta name="description" content="Imersão presencial de 1 dia para profissionais da odontologia. Diagnóstico, planejamento e execução clínica com método estruturado. Petrolina, 16 de maio de 2026.">
+    <!-- Meta Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3834617633503016');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=3834617633503016&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@500&display=swap" rel="stylesheet">
@@ -1915,6 +1932,65 @@
                     e.preventDefault();
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
+            });
+        });
+
+        /* ============================================
+           META TRACKING — Pixel + CAPI
+           ============================================ */
+        function generateEventId() {
+            return 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        function getCookie(name) {
+            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? match[2] : null;
+        }
+
+        function sendCAPI(eventName, eventId, customData) {
+            var payload = {
+                event_name: eventName,
+                event_id: eventId,
+                event_source_url: window.location.href,
+                user_agent: navigator.userAgent,
+                fbc: getCookie('_fbc') || '',
+                fbp: getCookie('_fbp') || '',
+                custom_data: customData || {}
+            };
+            fetch('/capi.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(function() {});
+        }
+
+        // PageView — CAPI (Pixel already fires in <head>)
+        (function() {
+            var pvId = generateEventId();
+            sendCAPI('PageView', pvId);
+        })();
+
+        // ViewContent — when investment section is visible
+        var vcFired = false;
+        var investObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && !vcFired) {
+                    vcFired = true;
+                    var vcId = generateEventId();
+                    fbq('track', 'ViewContent', { content_name: 'Investimento' }, { eventID: vcId });
+                    sendCAPI('ViewContent', vcId, { content_name: 'Investimento' });
+                }
+            });
+        }, { threshold: 0.3 });
+        var investSection = document.getElementById('investimento');
+        if (investSection) investObs.observe(investSection);
+
+        // InitiateCheckout — on CTA clicks (Garantir Minha Vaga)
+        document.querySelectorAll('a.shiny-cta').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var icId = generateEventId();
+                fbq('track', 'InitiateCheckout', { content_name: 'Turne Remodelar Petrolina' }, { eventID: icId });
+                sendCAPI('InitiateCheckout', icId, { content_name: 'Turne Remodelar Petrolina' });
             });
         });
     </script>
