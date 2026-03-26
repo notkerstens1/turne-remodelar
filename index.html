@@ -1993,6 +1993,45 @@
                 sendCAPI('InitiateCheckout', icId, { content_name: 'Turne Remodelar Petrolina' });
             });
         });
+
+        /* ============================================
+           UTM TRACKING — Captura UTMs e injeta ref no Sympla
+           ============================================ */
+        (function() {
+            // 1. Captura UTMs da URL
+            var params = new URLSearchParams(window.location.search);
+            var utmContent = params.get('utm_content');
+            var utmCampaign = params.get('utm_campaign');
+            var utmSource = params.get('utm_source');
+
+            // 2. Monta o ref pro Sympla
+            // IMPORTANTE: NÃO sanitizar, NÃO converter pra lowercase, NÃO trocar espaços.
+            // O valor precisa chegar exatamente como veio do utm_content,
+            // porque a planilha de tracking faz match por texto exato.
+            var ref = utmContent || utmCampaign || null;
+
+            // 3. Encontra todos os links do Sympla e injeta o ref
+            if (ref) {
+                var links = document.querySelectorAll('a[href*="sympla.com.br"]');
+                links.forEach(function(link) {
+                    var url = new URL(link.href);
+                    url.searchParams.set('ref', ref);
+                    link.href = url.toString();
+                });
+            }
+
+            // 4. Armazena UTMs no sessionStorage pra persistência durante a sessão
+            if (utmSource) {
+                sessionStorage.setItem('rapport_utm', JSON.stringify({
+                    source: utmSource,
+                    medium: params.get('utm_medium'),
+                    campaign: utmCampaign,
+                    content: utmContent,
+                    term: params.get('utm_term'),
+                    timestamp: new Date().toISOString()
+                }));
+            }
+        })();
     </script>
 </body>
 </html>
